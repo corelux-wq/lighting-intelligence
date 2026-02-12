@@ -1,0 +1,1165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="no-referrer">
+<title>Saxby Lighting — Best Seller Market Intelligence</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #1a1a1a;
+  --paper: #f5f7fa;
+  --accent: #6b21a8;
+  --accent-light: #f3e8ff;
+  --highlight: #c2410c;
+  --tier1: #6b21a8;
+  --tier1-bg: #f3e8ff;
+  --tier2: #b08300;
+  --tier2-bg: #fff3cd;
+  --border: #dde2e8;
+  --muted: #6b7280;
+  --card-bg: #fff;
+  --shadow: 0 2px 20px rgba(0,0,0,0.06);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'DM Sans',sans-serif;background:var(--paper);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased}
+
+.header{background:#fff;color:var(--ink);padding:48px 0 40px;position:relative;overflow:hidden;border-bottom:3px solid var(--accent)}
+.header-inner{max-width:1200px;margin:0 auto;padding:0 40px;position:relative;z-index:1}
+.header-label{font-family:'Space Mono',monospace;font-size:0.7rem;text-transform:uppercase;letter-spacing:2px;color:var(--muted);margin-bottom:12px}
+.header h1{font-family:'Space Mono',monospace;font-size:2.2rem;letter-spacing:-1px;margin-bottom:12px;line-height:1.2}
+.header h1 span{color:var(--accent);background:var(--accent-light);padding:0 6px;border-radius:3px}
+.header-sub{color:#555;font-size:0.95rem;max-width:720px;line-height:1.6;margin-top:16px}
+.header-meta{display:flex;gap:32px;margin-top:24px;padding-top:20px;border-top:1px solid var(--border);flex-wrap:wrap}
+.header-meta-item .val{font-family:'Space Mono',monospace;font-size:1.1rem;font-weight:700;color:var(--ink)}
+.header-meta-item .lbl{font-size:0.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-top:2px}
+
+.nav{background:#fff;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100;box-shadow:0 1px 8px rgba(0,0,0,0.04)}
+.nav-inner{max-width:1200px;margin:0 auto;padding:0 40px;display:flex;gap:4px;overflow-x:auto;scrollbar-width:none}
+.nav-inner::-webkit-scrollbar{display:none}
+.nav a{padding:14px 16px;text-decoration:none;color:var(--muted);font-size:0.82rem;font-weight:500;white-space:nowrap;border-bottom:2px solid transparent;transition:all 0.2s}
+.nav a:hover{color:var(--ink);border-bottom-color:var(--accent)}
+
+.container{max-width:1200px;margin:0 auto;padding:0 40px}
+
+.exec-summary{padding:48px 0 32px}
+.exec-box{background:#fff;border:1px solid var(--border);border-radius:8px;padding:32px 36px;border-left:4px solid var(--accent)}
+.exec-box h2{font-family:'Space Mono',monospace;font-size:1.1rem;margin-bottom:14px;color:var(--accent)}
+.exec-box p{font-size:0.92rem;color:#444;line-height:1.7;margin-bottom:12px}
+.exec-box p:last-child{margin-bottom:0}
+
+.metrics-bar{background:#fff;border-bottom:1px solid var(--border);padding:28px 0;margin-bottom:8px}
+.metrics-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+.metric{text-align:center;padding:16px;background:#fafbfc;border-radius:8px;border:1px solid var(--border)}
+.metric .num{font-family:'Space Mono',monospace;font-size:1.8rem;font-weight:700;color:var(--accent)}
+.metric .lbl{font-size:0.68rem;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-top:4px}
+
+.section{padding:48px 0 24px}
+.section-header{display:flex;align-items:baseline;gap:16px;margin-bottom:12px;padding-bottom:14px;border-bottom:2px solid var(--ink)}
+.section-header h2{font-family:'Space Mono',monospace;font-size:1.4rem;letter-spacing:-0.5px}
+.section-header .count{font-family:'Space Mono',monospace;font-size:0.78rem;color:var(--muted)}
+
+.section-intro{font-size:0.9rem;color:#555;line-height:1.65;margin-bottom:28px;max-width:800px}
+
+.product-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(380px,1fr));gap:16px;margin-bottom:32px}
+.product-card{background:var(--card-bg);border-radius:8px;border:1px solid var(--border);overflow:hidden;transition:transform 0.2s,box-shadow 0.2s}
+.product-card:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
+
+.card-top{display:flex;align-items:stretch}
+.card-img{width:160px;min-height:140px;flex-shrink:0;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;background:#f0f2f5}
+.card-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:center;padding:12px;background:#f0f2f5;z-index:1}
+.card-img .fallback{display:flex;font-family:'Space Mono',monospace;font-size:0.7rem;color:#888;text-align:center;padding:10px;line-height:1.5;width:100%;height:100%;align-items:center;justify-content:center;background:linear-gradient(135deg,#f8f8f8 0%,#efefef 100%);letter-spacing:0.5px;font-weight:600}
+.card-img img.err{display:none!important}
+
+.rank-badge{position:absolute;top:6px;left:6px;font-family:'Space Mono',monospace;font-size:0.52rem;font-weight:700;padding:2px 6px;border-radius:3px;letter-spacing:0.5px;text-transform:uppercase;z-index:2}
+.rank-top{background:var(--tier1-bg);color:var(--tier1)}
+.rank-strong{background:var(--tier2-bg);color:var(--tier2)}
+
+.card-body{padding:14px 18px;flex:1;display:flex;flex-direction:column}
+.product-position{font-family:'Space Mono',monospace;font-size:0.58rem;color:var(--muted);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:2px}
+.product-name{font-weight:700;font-size:0.9rem;line-height:1.3;margin-bottom:2px}
+.product-sku{font-family:'Space Mono',monospace;font-size:0.66rem;color:var(--muted);margin-bottom:6px}
+.product-specs{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:8px}
+.spec-tag{font-size:0.63rem;padding:2px 7px;border-radius:3px;font-weight:500}
+.spec-ip{background:#e8f4fd;color:#1a73a7}
+.spec-fire{background:#fde8e8;color:#c33}
+.spec-finish{background:#f0f2f5;color:#666}
+.spec-black{background:#333;color:#fff}
+.spec-led{background:#e6f9e6;color:#1a7a1a}
+
+.card-row{display:flex;align-items:baseline;gap:10px;margin-top:auto;padding-top:8px;border-top:1px solid #f0f2f5;flex-wrap:wrap}
+.price-rrp{font-size:0.7rem;color:#aaa;text-decoration:line-through}
+.price-street{font-family:'Space Mono',monospace;font-weight:700;font-size:0.95rem;color:var(--tier1)}
+.price-label{font-size:0.56rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.5px}
+.view-link{margin-left:auto;font-family:'Space Mono',monospace;font-size:0.6rem;color:var(--highlight);text-decoration:none;letter-spacing:0.5px;text-transform:uppercase;white-space:nowrap}
+.view-link:hover{text-decoration:underline}
+
+.card-evidence{padding:10px 18px 14px;background:#fafbfc;border-top:1px solid #f0f2f5;font-size:0.74rem;color:#666;line-height:1.5}
+
+/* DYNAMICS */
+.dynamics-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:16px;margin-bottom:40px}
+.dynamic-card{background:var(--card-bg);border:1px solid var(--border);border-radius:8px;padding:24px;border-left:4px solid var(--accent)}
+.dynamic-card h3{font-family:'Space Mono',monospace;font-size:0.85rem;margin-bottom:8px}
+.dynamic-card p{font-size:0.82rem;color:#555;line-height:1.55}
+.dynamic-card .implication{margin-top:10px;font-size:0.78rem;font-weight:700;color:var(--accent)}
+.methodology-box{background:#fff;border:1px solid var(--border);border-radius:8px;padding:28px 32px;margin:32px 0}
+.methodology-box h3{font-family:'Space Mono',monospace;font-size:0.9rem;margin-bottom:10px}
+.methodology-box p{font-size:0.82rem;color:#555;line-height:1.6;margin-bottom:8px}
+
+.footer{background:#fff;border-top:1px solid var(--border);padding:32px 0;margin-top:40px}
+.footer-inner{max-width:1200px;margin:0 auto;padding:0 40px;font-size:0.75rem;color:var(--muted);display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px}
+.back-link{font-family:'Space Mono',monospace;font-size:0.7rem;color:var(--accent);text-decoration:none;letter-spacing:0.5px}
+.back-link:hover{text-decoration:underline}
+
+@media(max-width:768px){
+  .header-inner,.container,.footer-inner,.nav-inner{padding:0 20px}
+  .dynamics-grid{grid-template-columns:1fr}
+  .header h1{font-size:1.6rem}
+  .metrics-grid{grid-template-columns:repeat(2,1fr)}
+  .product-grid{grid-template-columns:1fr}
+  .card-img{width:120px;min-height:120px}
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+<div class="header-inner">
+  <div class="header-label">Market Intelligence Report · February 2026</div>
+  <h1>Saxby Lighting — <span>33 Key Products</span></h1>
+  <p class="header-sub">Trade-focused product map of Saxby's best-selling UK lines. Part of Poole Lighting Ltd (also owns Endon). 30+ years manufacturing commercial and domestic lighting. UK-designed. Sold through electrical wholesalers (CEF, Edmundson, Rexel) and available at Screwfix. 98% stock holding, next-day delivery.</p>
+  <div class="header-meta">
+    <div class="header-meta-item"><div class="val">33</div><div class="lbl">Products Mapped</div></div>
+    <div class="header-meta-item"><div class="val">7</div><div class="lbl">Categories</div></div>
+    <div class="header-meta-item"><div class="val">Trade</div><div class="lbl">Primary Channel</div></div>
+    <div class="header-meta-item"><div class="val">30+</div><div class="lbl">Years Trading</div></div>
+  </div>
+</div>
+</header>
+
+<!-- NAV -->
+<nav class="nav">
+<div class="nav-inner">
+  <a href="index.html">← Portal</a>
+  <a href="#executive-summary">Executive Summary</a>
+  <a href="#fire-rated">Fire-Rated Downlights</a>
+  <a href="#outdoor-wall">Outdoor Wall</a>
+  <a href="#outdoor-ground">Ground & Decking</a>
+  <a href="#bathroom">Bathroom</a>
+  <a href="#spotlights">Spotlights</a>
+  <a href="#wall-interior">Interior Wall</a>
+  <a href="#commercial">Commercial</a>
+  <a href="#dynamics">Market Dynamics</a>
+</div>
+</nav>
+
+<!-- EXEC SUMMARY -->
+<div class="container">
+<div class="exec-summary" id="executive-summary">
+<div class="exec-box">
+  <h2>Executive Summary</h2>
+  <p><strong>Saxby is the UK trade electrician's everyday brand — with deep wholesale distribution and formidable range depth.</strong> Part of Poole Lighting Ltd (also owns Endon), Saxby has 30+ years manufacturing history and claims 98% stock holding with next-day delivery. Their fire-rated downlight ranges (ShieldECO for wholesale, CosmosEco for Screwfix) are specification-driven: fire-rated 30/60/90 min, IP65, dimmable, CCT selectable, tool-less push-fit installation. Multi-retailer sweep confirms stocking at 15+ online retailers across trade and retail channels.</p>
+  <p><strong>Distribution spans wholesale and retail.</strong> Wholesale-first via CEF, Edmundson, Rexel, YESSS Electrical, and City Electrical Factors. Retail presence at Screwfix (75 downlights, 61 outdoor wall lights, 73 indoor products listed — Feb 2026). Also stocked at Electrical Counter, Click4Electrics, Electrical4Less, Sparks Direct, Alert Electrical, Electrical2Go, Lamplec, Direct Trade Supplies, Lights4Living, and Amazon UK. This multi-channel reach is a core strength, though price variance is significant: HeroPRO bulkhead ranges from ~£10 (Lamplec/Click4Electrics trade) to £22 (Electrical Counter).</p>
+  <p><strong>Channel-specific branding:</strong> Screwfix sells the <strong>CosmosEco V3</strong> range (top-selling Saxby downlight on Screwfix, 4.9★, £8.89 single chrome), while wholesale channels carry the <strong>ShieldECO</strong> range. Both are fire-rated IP65 with similar specs, but different naming may cause confusion. The <strong>ShieldSLIM</strong> (103174) is the slim-profile play — 7W 4CCT (2700/3000/4000/6500K) designed for shallow ceiling voids. The <strong>OrbitalPRO</strong> (102669) steps up to 9W for higher-output applications.</p>
+  <p><strong>Outdoor: Oslo outsells Palin at Screwfix.</strong> The Oslo PIR Grey (£36.99, 4.9★ from 9 reviews) is Screwfix's #1 Saxby outdoor wall light, followed by Icarus PIR (£14.99) and Arc Up &amp; Down (£12.98). The Palin marine grade (316 SS) range offers IP65 coastal specification with PIR options. </p>
+  
+  <p><strong>Key gaps vs design brands:</strong> No pendant range. No decorative table/floor lamps. No smart home integration. No Scandinavian design cachet. But within its trade lane, Saxby's range depth is formidable: the Electrical Counter alone lists 15+ downlight sub-ranges (ShieldECO, ShieldPRO, OrbitalPRO, SirioDISC, Speculo, Garrix, Hoxton, Ravel, Axial, Cast, Converse, Heatguard, LALO, Pacto, Peake, Tetra, Xeno).</p>
+</div>
+</div>
+</div>
+
+<!-- METRICS -->
+<div class="metrics-bar" id="metrics">
+<div class="container">
+<div class="metrics-grid">
+  <div class="metric"><div class="num">33</div><div class="lbl">Products Mapped</div></div>
+  <div class="metric"><div class="num">15+</div><div class="lbl">Retailers Verified</div></div>
+  <div class="metric"><div class="num">£5–£55</div><div class="lbl">Street Price Range</div></div>
+  <div class="metric"><div class="num">IP65+FR</div><div class="lbl">Spec Sweet Spot</div></div>
+</div>
+</div>
+</div>
+
+<!-- ============================================ -->
+<!-- SECTION 1: FIRE-RATED DOWNLIGHTS             -->
+<!-- ============================================ -->
+<div class="container">
+<div class="section" id="fire-rated">
+<div class="section-header">
+  <h2>Fire-Rated Downlights</h2>
+  <span class="count">7 products</span>
+</div>
+<p class="section-intro">Saxby's hero category and bread-and-butter revenue driver. Two key branding variants: <strong>ShieldECO</strong> for wholesale/trade channels and <strong>CosmosEco V3</strong> for Screwfix (Screwfix #1 Saxby seller, chrome £8.89, 4.9★ from 14 reviews, 6-pack £47.99). Both are fire-rated 30/60/90, IP65, dimmable, CCT selectable, tool-less push-fit installation. The <strong>ShieldSLIM</strong> adds slim-depth 4CCT selection for shallow voids, while the <strong>OrbitalPRO</strong> steps up to 9W for higher-output specifications. 75 Saxby downlight SKUs listed at Screwfix alone (35 fire-rated, 28 non-fire-rated). All come with interchangeable bezels (white standard, plus chrome, nickel, black, antique brass, polished brass, anthracite grey). Electrical Counter carries 15+ sub-ranges including OrbitalPRO, SirioDISC, Speculo, Garrix, and Hoxton. </p>
+
+<div class="product-grid">
+
+<!-- ShieldECO CCT 5W IP65 Single -->
+<div class="product-card">
+<div class="card-top">
+<div class="card-img"><span class="rank-badge rank-top">#1 Volume</span>
+<img src="https://www.saxbytrade.com/netalogue/photos/109804.gif" alt="ShieldECO CCT 5W" onerror="this.classList.add('err')">
+<div class="fallback">SHIELDECO<br>CCT 5W</div>
+</div>
+<div class="card-body">
+<div class="product-position">Fire-Rated · Hero Product</div>
+<div class="product-name">ShieldECO CCT 5W IP65 — Single</div>
+<div class="product-sku">109804 · Integrated LED 5W</div>
+<div class="product-specs">
+  <span class="spec-tag spec-fire">Fire Rated 30/60/90</span>
+  <span class="spec-tag spec-ip">IP65</span>
+  <span class="spec-tag spec-led">CCT 3/4/6K</span>
+</div>
+<div class="card-row">
+  <span class="price-street">~£6</span>
+  <span class="price-label">est. trade</span><a href="https://www.saxbytrade.com/products/Recessed/Fire-Rated/109804_ShieldECO-CCT-5W-iP65-Single" target="_blank" class="view-link">View →</a>
+</div>
+</div>
+</div>
+<div class="card-evidence">Saxby's #1 volume product. Fire-rated, IP65, dimmable, 3 colour temperatures via switch (3000K/4000K/6000K). Tool-less push-fit connection box. 500 lumens. 57mm cut-out. 7 bezel options. Sold as singles and 10-packs (5% saving). Available at Amazon UK, Screwfix, all major wholesalers.</div>
+</div>
+
+<!-- ShieldECO CCT 5W 10-Pack -->
+<div class="product-card">
+<div class="card-top">
+<div class="card-img"><span class="rank-badge rank-strong">Bulk Buy</span>
+<img src="https://www.saxbytrade.com/netalogue/zoom/113639.jpg" alt="ShieldECO 10-Pack" onerror="this.classList.add('err')">
+<div class="fallback">SHIELDECO<br>10-PACK</div>
+</div>
+<div class="card-body">
+<div class="product-position">Fire-Rated · Multi-Buy</div>
+<div class="product-name">ShieldECO CCT 5W IP65 — 10 Pack</div>
+<div class="product-sku">113639 · Integrated LED 5W × 10</div>
+<div class="product-specs">
+  <span class="spec-tag spec-fire">Fire Rated 30/60/90</span>
+  <span class="spec-tag spec-ip">IP65</span>
+  <span class="spec-tag spec-led">CCT 3/4/6K</span>
+</div>
+<div class="card-row">
+  <span class="price-street">~£55</span>
+  <span class="price-label">est. trade (10-pack)</span><a href="https://www.saxbytrade.com/products/113639_ShieldECO-CCT-5W-iP65-10-Pack" target="_blank" class="view-link">View →</a>
+</div>
+</div>
+</div>
+<div class="card-evidence">10-pack of the ShieldECO CCT for multi-room installations. 5% saving vs singles. Ideal for new-build and renovation projects. Same spec as single: fire-rated, IP65, dimmable, CCT selectable. The electrician's bulk-buy staple.</div>
+</div>
+
+<!-- ShieldECO 500 CCT Tilt -->
+<div class="product-card">
+<div class="card-top">
+<div class="card-img"><span class="rank-badge rank-strong">Tilt</span>
+<img src="https://www.saxbytrade.com/netalogue/zoom/108294_1.jpg" alt="ShieldECO Tilt" onerror="this.classList.add('err')">
+<div class="fallback">SHIELDECO<br>TILT CCT</div>
+</div>
+<div class="card-body">
+<div class="product-position">Fire-Rated · Adjustable</div>
+<div class="product-name">ShieldECO 500 CCT Tilt 5W</div>
+<div class="product-sku">108294 · Integrated LED 5W</div>
+<div class="product-specs">
+  <span class="spec-tag spec-fire">Fire Rated</span>
+  <span class="spec-tag spec-ip">IP65</span>
+  <span class="spec-tag spec-finish">Tiltable</span>
+</div>
+<div class="card-row">
+  <span class="price-street">~£8</span>
+  <span class="price-label">est. trade</span><a href="https://www.saxbytrade.com/products/Recessed/Fire-Rated/108294_ShieldECO-500-CCT-Tilt-5W" target="_blank" class="view-link">View →</a>
+</div>
+</div>
+</div>
+<div class="card-evidence">Tiltable version of ShieldECO for angled ceilings or directional lighting. Same fire rating, IP65, dimmable spec. CCT selectable. 500 lumens with 60° lens. Slim profile, matt white finish.</div>
+</div>
+
+<!-- ShieldECO CCT Anti-Glare White -->
+<div class="product-card">
+<div class="card-top">
+<div class="card-img"><span class="rank-badge rank-strong">Anti-Glare</span>
+<img src="https://cdn.shopify.com/s/files/1/0832/4147/products/101342.jpg?v=1744867201" alt="ShieldECO Anti-Glare White" onerror="this.classList.add('err')">
+<div class="fallback">SHIELDECO<br>ANTI-GLARE</div>
+</div>
+<div class="card-body">
+<div class="product-position">Fire-Rated · Low Glare</div>
+<div class="product-name">ShieldECO CCT Anti-Glare White 5W</div>
+<div class="product-sku">101342 · Integrated LED 5W</div>
+<div class="product-specs">
+  <span class="spec-tag spec-fire">Fire Rated</span>
+  <span class="spec-tag spec-ip">IP65</span>
+  <span class="spec-tag spec-led">Anti-Glare</span>
+</div>
+<div class="card-row">
+  <span class="price-street">~£7</span>
+  <span class="price-label">est. trade</span><a href="https://www.saxbytrade.com/products/101342_ShieldECO-CCT-antiglare-White-iP65-5W-cct" target="_blank" class="view-link">View →</a>
+</div>
+</div>
+</div>
+<div class="card-evidence">Anti-glare version with recessed LED module for reduced visual discomfort. Same fire rating and IP65 spec. CCT selectable (warm/cool/daylight). Tool-less push-fit installation. Also available in black (101343).</div>
+</div>
+
+<!-- ShieldECO CCT Anti-Glare Black -->
+<div class="product-card">
+<div class="card-top">
+<div class="card-img"><span class="rank-badge rank-strong">Trending</span>
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQi9S_9L4Ce8cZzJTeqxmRxjwqt-6-GaicTMg&s" alt="ShieldECO Anti-Glare Black" onerror="this.classList.add('err')">
+<div class="fallback">SHIELDECO<br>AG BLACK</div>
+</div>
+<div class="card-body">
+<div class="product-position">Fire-Rated · Low Glare · Black</div>
+<div class="product-name">ShieldECO CCT Anti-Glare Black 5W</div>
+<div class="product-sku">101343 · Integrated LED 5W</div>
+<div class="product-specs">
+  <span class="spec-tag spec-fire">Fire Rated</span>
+  <span class="spec-tag spec-ip">IP65</span>
+  <span class="spec-tag spec-black">Matt Black</span>
+</div>
+<div class="card-row">
+  <span class="price-street">~£7</span>
+  <span class="price-label">est. trade</span><a href="https://www.saxbytrade.com/products/101343_ShieldECO-CCT-antiglare-Black-iP65-5W-cct" target="_blank" class="view-link">View →</a>
+</div>
+</div>
+</div>
+<div class="card-evidence">Black version of the anti-glare ShieldECO. Trending finish for modern interiors. Same spec: fire-rated, IP65, dimmable, CCT selectable. Tool-less installation.</div>
+</div>
+
+<!-- ShieldSLIM 4CCT 7W -->
+<div class="product-card">
+<div class="card-top">
+<div class="card-img"><span class="rank-badge rank-top">Universal</span>
+<img src="https://www.saxbytrade.com/netalogue/zoom/103174_1.jpg" alt="ShieldSLIM 4CCT 7W" onerror="this.classList.add('err')">
+<div class="fallback">SHIELDSLIM<br>4CCT 7W</div>
+</div>
+<div class="card-body">
+<div class="product-position">Fire-Rated · Slim Profile</div>
+<div class="product-name">ShieldSLIM 4CCT 7W Downlight</div>
+<div class="product-sku">103174 · Integrated LED 7W</div>
+<div class="product-specs">
+  <span class="spec-tag spec-fire">Fire Rated 30/60/90</span>
+  <span class="spec-tag spec-ip">IP65</span>
+  <span class="spec-tag spec-led">4CCT Selectable</span>
+</div>
+<div class="card-row">
+  <span class="price-street">~£10</span>
+  <span class="price-label">est. trade</span><a href="https://www.saxbytrade.com/products/103174_ShieldSliM-4CCT-7W-downlight" target="_blank" class="view-link">View →</a>
+</div>
+</div>
+</div>
+<div class="card-evidence">Slim-profile fire-rated downlight with 4-way CCT switch (2700/3000/4000/6500K). 7W integrated LED, 800 lumens. IP65, fire-rated 30/60/90 min. Tool-less push-fit connector. Slim depth for shallow ceiling voids — solves one of the most common installation headaches for electricians.</div>
+</div>
+
+<!-- OrbitalPRO 4CCT 9W Matt White IP65 -->
+<div class="product-card">
+<div class="card-top">
+<div class="card-img"><span class="rank-badge rank-strong">Premium</span>
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZBl68JWRbvGba4VJ7yvYV6WKWnDwy4xwPcw&s" alt="OrbitalPRO 4CCT 9W" onerror="this.classList.add('err')">
+<div class="fallback">ORBITALPRO<br>4CCT 9W</div>
+</div>
+<div class="card-body">
+<div class="product-position">Fire-Rated · High Output</div>
+<div class="product-name">OrbitalPRO 4CCT 9W Matt White IP65</div>
+<div class="product-sku">102669 · Integrated LED 9W</div>
+<div class="product-specs">
+  <span class="spec-tag spec-fire">Fire Rated 30/60/90</span>
+  <span class="spec-tag spec-ip">IP65</span>
+  <span class="spec-tag spec-led">4CCT · 9W</span>
+</div>
+<div class="card-row">
+  <span class="price-street">~£12</span>
+  <span class="price-label">est. trade</span><a href="https://www.saxbytrade.com/products/Recessed/Fire-Rated/102669_OrbitalPRO-4CCT-9W-Matt-White-iP65" target="_blank" class="view-link">View →</a>
+</div>
+</div>
+</div>
+<div class="card-evidence">Higher-output fire-rated downlight for larger rooms and commercial spaces. 9W integrated LED with 4-way CCT selection. IP65, fire-rated 30/60/90 min. Matt white finish. Steps up from the 5W ShieldECO for kitchens, utility rooms, and open-plan living where more lumens are needed.</div>
+</div>
+
+</div><!-- /product-grid -->
+</div><!-- /section -->
+
+<!-- ============================================ -->
+<!-- SECTION 2: OUTDOOR WALL LIGHTS               -->
+<!-- ============================================ -->
+<div class="section" id="outdoor-wall">
+<div class="section-header">
+  <h2>Outdoor Wall Lights</h2>
+  <span class="count">5 products</span>
+</div>
+<p class="section-intro">The Palin range is Saxby's outdoor wall light workhorse — available in black, white, and marine grade stainless steel (316) with optional PIR. Marine grade versions use 316-grade stainless specifically rated for coastal environments. PIR versions include manual override with 110° detection angle and 8m range. Price point sits well below premium Scandinavian outdoor brands.</p>
+
+<div class="product-grid">
+
+<!-- Palin 2lt Black -->
+<div class="product-card">
+<div class="card-top">
+<div class="card-img"><span class="rank-badge rank-top">Volume</span>
+<img src="https://www.tiffanylightingdirect.co.uk/cdn/shop/products/75432.jpg?v=1744869305" alt="Palin Twin Black" onerror="this.classList.add('err')">
+<div class="fallback">PALIN<br>BLACK 2LT</div>
+</div>
+<div class="card-body">
+<div class="product-position">Outdoor Wall · Up/Down</div>
+<div class="product-name">Palin Twin Outdoor Wall Light Black IP44 7W</div>
+<div class="product-sku">75432 · GU10 × 2</div>
+<div class="product-specs">
+  <span class="spec-tag spec-ip">IP44</span>
+  <span class="spec-tag spec-black">Matt Black</span>
+  <span class="spec-tag spec-finish">GU10 × 2</span>
+</div>
+<div class="card-row">
+  <span class="price-rrp">RRP £57</span>
+  <span class="price-street">£30</span>
+  <span class="price-label">est. online</span><a href="https://www.saxbytrade.com/products/Exterior/Collection/75432_Palin-2lt-Wall-iP44-Matt-Black" target="_blank" class="view-link">View →</a>
+</div>
+</div>
+</div>
+<div class="card-evidence">Budget twin up/down wall light in matt black. GU10 replaceable lamps — dimmable with correct bulb. Strong volume line at the sub-£30 price point.</div>
+</div>
+
+<!-- Palin 2lt White -->
+<div class="product-card">
+<div class="card-top">
+<div class="card-img"><span class="rank-badge rank-strong">Volume</span>
+<img src="https://www.saxbytrade.com/netalogue/zoom/75439_1.jpg" alt="Palin Twin White" onerror="this.classList.add('err')">
+<div class="fallback">PALIN<br>WHITE 2LT</div>
+</div>
+<div class="card-body">
+<div class="product-position">Outdoor Wall · Up/Down</div>
+<div class="product-name">Palin Twin Outdoor Wall Light White IP44 7W</div>
+<div class="product-sku">75439 · GU10 × 2</div>
+<div class="product-specs">
+  <span class="spec-tag spec-ip">IP44</span>
+  <span class="spec-tag spec-finish">Matt White</span>
+  <span class="spec-tag spec-finish">GU10 × 2</span>
+</div>
+<div class="card-row">
+  <span class="price-rrp">RRP £57</span>
+  <span class="price-street">£30</span>
+  <span class="price-label">est. online</span><a href="https://www.saxbytrade.com/products/Exterior/Collection/75439_Palin-2lt-Wall-iP44-White" target="_blank" class="view-link">View →</a>
+</div>
+</div>
+</div>
+<div class="card-evidence">White version of the Palin twin. Same spec as black. 244 units in stock at TLC. Popular for rendered facades. Aluminium construction, clear glass diffusers.</div>
+</div>
+
+<!-- Palin 2lt Marine Grade -->
+<div class="product-card">
+<div class="card-top">
+<div class="card-img"><span class="rank-badge rank-strong">Marine Grade</span>
+<img src="https://www.saxbytrade.com/netalogue/zoom/101350_2.jpg" alt="Palin Marine Grade" onerror="this.classList.add('err')">
+<div class="fallback">PALIN<br>MARINE 2LT</div>
+</div>
+<div class="card-body">
+<div class="product-position">Outdoor Wall · Marine Grade</div>
+<div class="product-name">Palin 2lt Marine Grade IP65 7W SS</div>
+<div class="product-sku">101350 · GU10 × 2</div>
+<div class="product-specs">
+  <span class="spec-tag spec-ip">IP65</span>
+  <span class="spec-tag spec-finish">316 SS</span>
+  <span class="spec-tag spec-finish">Marine Grade</span>
+</div>
+<div class="card-row">
+  <span class="price-rrp">RRP £52.50</span>
+  <span class="price-street">£28</span>
+  <span class="price-label">est. online</span><a href="https://www.saxbytrade.com/products/Exterior/Wall/101350_Palin-2lt-wall-marine-grade-iP65-7W-Stainless-Steel" target="_blank" class="view-link">View →</a>
+</div>
+</div>
+</div>
+<div class="card-evidence">Marine grade 316 stainless steel for coastal areas. IP65 (higher than standard Palin). Twin up/down GU10. Clear glass. Brushed stainless finish. Strong specification for seaside properties and commercial installations.</div>
+</div>
+
+<!-- Palin PIR 2lt Marine Grade -->
+<div class="product-card">
+<div class="card-top">
+<div class="card-img"><span class="rank-badge rank-top">PIR + Marine</span>
+<img src="https://www.saxbytrade.com/netalogue/zoom/101352_1.jpg" alt="Palin PIR Marine" onerror="this.classList.add('err')">
+<div class="fallback">PALIN PIR<br>MARINE 2LT</div>
+</div>
+<div class="card-body">
+<div class="product-position">Outdoor Wall · PIR · Marine</div>
+<div class="product-name">Palin PIR 2lt Marine Grade IP65 7W</div>
+<div class="product-sku">101352 · GU10 × 2 + PIR</div>
+<div class="product-specs">
+  <span class="spec-tag spec-ip">IP65</span>
+  <span class="spec-tag spec-finish">316 SS</span>
+  <span class="spec-tag spec-led">PIR Override</span>
+</div>
+<div class="card-row">
+  <span class="price-rrp">RRP £77.70</span>
+  <span class="price-street">£40</span>
+  <span class="price-label">est. online</span><a href="https://www.saxbytrade.com/products/101352_Palin-PiR-1lt-Wall-Marine-Grade-iP65-Stainless-Steel" target="_blank" class="view-link">View →</a>
+</div>
+</div>
+</div>
+<div class="card-evidence">Top-spec Palin: marine grade SS316 + built-in PIR with manual override. 110° detection, 8m range, 5sec–5min timer. IP65. Ideal for coastal commercial properties. 256 units in stock at TLC.</div>
+</div>
+
+<!-- Palin PIR 1lt Marine Grade -->
+<div class="product-card">
+<div class="card-top">
+<div class="card-img"><span class="rank-badge rank-strong">PIR Compact</span>
+<img src="https://files.ekmcdn.com/massivelighting/images/saxby-palin-pir-1lt-wall-marine-grade-ip65-7w-101351-by-massive-lighting-(2)-10095-p.jpg?v=2D39780E-5131-4662-9D3D-D99BB8262BD8" alt="Palin PIR 1lt" onerror="this.classList.add('err')">
+<div class="fallback">PALIN PIR<br>MARINE 1LT</div>
+</div>
+<div class="card-body">
+<div class="product-position">Outdoor Wall · PIR · Down Only</div>
+<div class="product-name">Palin PIR 1lt Marine Grade IP65 7W</div>
+<div class="product-sku">101351 · GU10 + PIR</div>
+<div class="product-specs">
+  <span class="spec-tag spec-ip">IP65</span>
+  <span class="spec-tag spec-finish">316 SS</span>
+  <span class="spec-tag spec-led">PIR Override</span>
+</div>
+<div class="card-row">
+  <span class="price-street">~£35</span>
+  <span class="price-label">est. online</span><a href="https://www.saxbytrade.com/products/101351_Palin-PiR-1lt-Wall-Marine-Grade-iP65-Stainless-Steel" target="_blank" class="view-link">View →</a>
+</div>
+</div>
+</div>
+<div class="card-evidence">Single-light version — downlight only with PIR. Marine grade SS316, IP65. Same PIR spec: 110° detection, 8m range, manual override. Lower price point for installations needing single-direction light.</div>
+</div>
+
+</div><!-- /product-grid -->
+</div><!-- /section -->
+
+<!-- ============================================ -->
+<!-- SECTION 3: OUTDOOR GROUND & DECKING          -->
+<!-- ============================================ -->
+<div class="section" id="outdoor-ground">
+<div class="section-header">
+  <h2>Outdoor Ground & Decking</h2>
+  <span class="count">4 products</span>
+</div>
+<p class="section-intro">IkonPRO is Saxby's signature decking range — IP67 recessed LED kits with a unique interchangeable head system allowing CCT change (3000K/4000K) by rotating the LED head 180°. Available in stainless steel and black, in 25mm, 35mm, and 45mm sizes. Designed for first-fix wiring during deck build. The Hoxton range covers larger ground lights for driveways and pathways. Screwfix staple.</p>
+
+<div class="product-grid">
+
+<!-- IkonPRO CCT 35mm SS -->
+<div class="product-card">
+<div class="card-top">
+<div class="card-img"><span class="rank-badge rank-top">Flagship</span>
+<img src="https://www.nationallighting.co.uk/media/catalog/product/8/6/86225_1.webp" alt="IkonPRO SS" onerror="this.classList.add('err')">
+<div class="fallback">IKONPRO<br>35mm SS</div>
+</div>
+<div class="card-body">
+<div class="product-position">Decking · 10-Kit</div>
+<div class="product-name">IkonPRO CCT 35mm 10-Kit IP67 SS</div>
+<div class="product-sku">73348 · LED 0.75W × 10</div>
+<div class="product-specs">
+  <span class="spec-tag spec-ip">IP67</span>
+  <span class="spec-tag spec-led">CCT 3/4K</span>
+  <span class="spec-tag spec-finish">Stainless Steel</span>
+</div>
+<div class="card-row">
+  <span class="price-street">~£38</span>
+  <span class="price-label">est. online (10-kit)</span><a href="https://www.saxbytrade.com/products/Exterior/decking/73348_ikonPRO-CCT-3000K4000K-35mm-kit-iP67-075W-cct" target="_blank" class="view-link">View →</a>
+</div>
+</div>
+</div>
+<div class="card-evidence">Screwfix best-seller. 10 recessed LED deck lights with interchangeable heads for CCT selection (3000K or 4000K — rotate head 180° to swap). IP67 for full outdoor exposure. Rubber caps protect connectors during deck build phase. Also available in 25mm and 45mm.</div>
+</div>
+
+<!-- IkonPRO CCT 35mm Black -->
+<div class="product-card">
+<div class="card-top">
+<div class="card-img"><span class="rank-badge rank-strong">Trending</span>
+<img src="https://www.saxbytrade.com/netalogue/photos/99765.jpg" alt="IkonPRO Black" onerror="this.classList.add('err')">
+<div class="fallback">IKONPRO<br>35mm BLK</div>
+</div>
+<div class="card-body">
+<div class="product-position">Decking · 10-Kit · Black</div>
+<div class="product-name">IkonPRO CCT 35mm Kit Black IP67</div>
+<div class="product-sku">99765 · LED 0.75W × 10</div>
+<div class="product-specs">
+  <span class="spec-tag spec-ip">IP67</span>
+  <span class="spec-tag spec-led">CCT 3/4K</span>
+  <span class="spec-tag spec-black">Black</span>
+</div>
+<div class="card-row">
+  <span class="price-street">~£38</span>
+  <span class="price-label">est. online (10-kit)</span><a href="https://www.saxbytrade.com/products/Exterior/decking/99765_ikonPRO-CCT-3000K4000K-35mm-kit-black-iP67-075W-cct" target="_blank" class="view-link">View →</a>
+</div>
+</div>
+</div>
+<div class="card-evidence">Black version of IkonPRO for composite decking and dark timber. Same interchangeable head CCT system. IP67. Optional PIR presence detector and dusk-to-dawn photocell accessories available separately.</div>
+</div>
+
+<!-- Hoxton Ground Light 108mm -->
+<div class="product-card">
+<div class="card-top">
+<div class="card-img"><span class="rank-badge rank-strong">Strong</span>
+<img src="https://www.outdoorandgardenlighting.co.uk/cdn/shop/files/90962.jpg?v=1760368147" alt="Hoxton Ground Light" onerror="this.classList.add('err')">
+<div class="fallback">HOXTON<br>108mm</div>
+</div>
+<div class="card-body">
+<div class="product-position">Ground Light · Driveway</div>
+<div class="product-name">Hoxton LED Ground Light 108mm IP67 6W</div>
+<div class="product-sku">90962 · Integrated LED 6W</div>
+<div class="product-specs">
+  <span class="spec-tag spec-ip">IP67</span>
+  <span class="spec-tag spec-finish">Stainless Steel</span>
+  <span class="spec-tag spec-led">3000K</span>
+</div>
+<div class="card-row">
+  <span class="price-street">~£35</span>
+  <span class="price-label">est. online</span><a href="https://www.saxbytrade.com/products/Exterior/Ground-light/90964_Hoxton-13W-iP67-3000K" target="_blank" class="view-link">View →</a>
+</div>
+</div>
+</div>
+<div class="card-evidence">108mm diameter stainless steel ground light. IP67 for driveways, pathways, patios. Clear glass lens, integrated 6W LED (3000K warm white). Also available in 4000K (79195), 141mm (90963/90964), and 185mm (94059/94060) sizes.</div>
+</div>
+
+<!-- Cove Marine Grade Ground -->
+<div class="product-card">
+<div class="card-top">
+<div class="card-img"><span class="rank-badge rank-strong">Marine Grade</span>
+<img src="https://m.media-amazon.com/images/I/51iYKnV3OCL.jpg" alt="Cove Marine Grade" onerror="this.classList.add('err')">
+<div class="fallback">COVE<br>MARINE</div>
+</div>
+<div class="card-body">
+<div class="product-position">Ground Light · Marine Grade</div>
+<div class="product-name">Cove Marine Grade Ground Light IP67</div>
+<div class="product-sku">73463 · Integrated LED</div>
+<div class="product-specs">
+  <span class="spec-tag spec-ip">IP67</span>
+  <span class="spec-tag spec-finish">316 SS</span>
+  <span class="spec-tag spec-finish">Frosted</span>
+</div>
+<div class="card-row">
+  <span class="price-street">~£30</span>
+  <span class="price-label">est. online</span><a href="https://www.saxbytrade.com/products/Exterior/decking/73463_Cove-warm-White-iP67-08W-warm-white" target="_blank" class="view-link">View →</a>
+</div>
+</div>
+</div>
+<div class="card-evidence">Marine grade 316 stainless steel ground light with frosted glass diffuser. IP67. 3000K warm white. Purpose-built for coastal installations. Also available in 6500K cool white (67360) and 4000K (99561).</div>
+</div>
+
+</div><!-- /product-grid -->
+</div><!-- /section -->
+
+<!-- ============================================ -->
+<!-- SECTION 4: BATHROOM                          -->
+<!-- ============================================ -->
+<div class="section" id="bathroom">
+<div class="section-header">
+  <h2>Bathroom Ceiling & Wall</h2>
+  <span class="count">4 products</span>
+</div>
+<p class="section-intro">Saxby's bathroom range focuses on chrome and glass flush-mount ceiling lights and matching wall lights. The Portico and Pure ranges are functional, affordable bathroom lighting with IP44 ratings. No smart dimming features (unlike Nordlux Moodmaker™) — these are straightforward, specification-driven bathroom fittings.</p>
+
+<div class="product-grid">
+
+<!-- Portico Flush Nickel LED -->
+<div class="product-card">
+<div class="card-top">
+<div class="card-img"><span class="rank-badge rank-top">Core</span>
+<img src="https://www.saxbytrade.com/netalogue/zoom/54675_5.jpg" alt="Portico LED CCT" onerror="this.classList.add('err')">
+<div class="fallback">PORTICO<br>FLUSH LED</div>
+</div>
+<div class="card-body">
+<div class="product-position">Bathroom Ceiling · LED Flush</div>
+<div class="product-name">Portico LED CCT Satin Nickel Flush IP44 9W</div>
+<div class="product-sku">54675 · Integrated LED 9W CCT</div>
+<div class="product-specs">
+  <span class="spec-tag spec-ip">IP44</span>
+  <span class="spec-tag spec-finish">Satin Nickel</span>
+  <span class="spec-tag spec-led">LED</span>
+</div>
+<div class="card-row">
+  <span class="price-rrp">RRP £46.50</span>
+  <span class="price-street">£35</span>
+  <span class="price-label">est. online</span><a href="https://www.saxbytrade.com/products/54675_Portico-lEd-CCT-iP44-9W-Satin-Nickel" target="_blank" class="view-link">View →</a>
+</div>
+</div>
+</div>
+<div class="card-evidence">LED flush ceiling light in satin nickel with frosted glass. IP44 for bathroom use (Zone 2). CCT selectable (3000K/4000K/6000K). 9W integrated LED with driver included. Can also be wall mounted. Clean, classic styling.</div>
+</div>
+
+<!-- Portico Flush Nickel Frosted -->
+<div class="product-card">
+<div class="card-top">
+<div class="card-img"><span class="rank-badge rank-strong">Variant</span>
+<img src="https://www.universal-lighting.co.uk/assets/12421-unlit.jpg" alt="Portico Satin Nickel" onerror="this.classList.add('err')">
+<div class="fallback">PORTICO<br>FLUSH E27</div>
+</div>
+<div class="card-body">
+<div class="product-position">Bathroom Ceiling · Classic</div>
+<div class="product-name">Portico Satin Nickel & Frosted Glass Flush IP44</div>
+<div class="product-sku">12421 · E27</div>
+<div class="product-specs">
+  <span class="spec-tag spec-ip">IP44</span>
+  <span class="spec-tag spec-finish">Satin Nickel</span>
+  <span class="spec-tag spec-finish">E27</span>
+</div>
+<div class="card-row">
+  <span class="price-rrp">RRP £32.40</span>
+  <span class="price-street">£25</span>
+  <span class="price-label">est. online</span><a href="https://www.saxbytrade.com/products/12421_portico-satin-nickel-ip44-40w" target="_blank" class="view-link">View →</a>
+</div>
+</div>
+</div>
+<div class="card-evidence">Classic bathroom flush with E27 replaceable lamp. Satin nickel & frosted glass. IP44. Budget bathroom ceiling light at a strong price point.</div>
+</div>
+
+<!-- Pure Chrome Flush -->
+<div class="product-card">
+<div class="card-top">
+<div class="card-img"><span class="rank-badge rank-top">Core</span>
+<img src="https://www.universal-lighting.co.uk/assets/34200-main-image.jpg" alt="Pure Chrome Flush" onerror="this.classList.add('err')">
+<div class="fallback">PURE<br>CHROME FLUSH</div>
+</div>
+<div class="card-body">
+<div class="product-position">Bathroom Ceiling · Premium</div>
+<div class="product-name">Pure Chrome & Opal Glass Flush IP44</div>
+<div class="product-sku">34200 · G9 × 3</div>
+<div class="product-specs">
+  <span class="spec-tag spec-ip">IP44</span>
+  <span class="spec-tag spec-finish">Chrome</span>
+  <span class="spec-tag spec-finish">G9 Dimmable</span>
+</div>
+<div class="card-row">
+  <span class="price-rrp">RRP £78</span>
+  <span class="price-street">£50</span>
+  <span class="price-label">est. online</span><a href="https://www.saxbytrade.com/products/34200_Pure-3lt-flush-iP44-32W-daylight-white" target="_blank" class="view-link">View →</a>
+</div>
+</div>
+</div>
+<div class="card-evidence">Premium bathroom flush with 3 × G9 lamps. Chrome plate with opal duplex glass. IP44 rated. Dimmable with compatible G9 LEDs. The "upgrade" bathroom ceiling light.</div>
+</div>
+
+<!-- Pure Chrome Wall -->
+<div class="product-card">
+<div class="card-top">
+<div class="card-img"><span class="rank-badge rank-strong">Wall Mount</span>
+<img src="https://cdn.firstchoicelighting.co.uk/media/catalog/product/cache/6ed8e34a97879fd4548416187c1dfebb/t/u/tumbnail_924cc8e6-c7d8-402d-8470-847993a2cac6.jpg" alt="Pure Wall" onerror="this.classList.add('err')">
+<div class="fallback">PURE<br>WALL</div>
+</div>
+<div class="card-body">
+<div class="product-position">Bathroom Wall · Matching</div>
+<div class="product-name">Pure Chrome & Opal Glass Wall IP44</div>
+<div class="product-sku">34483 · E14</div>
+<div class="product-specs">
+  <span class="spec-tag spec-ip">IP44</span>
+  <span class="spec-tag spec-finish">Chrome</span>
+  <span class="spec-tag spec-finish">Matt Opal</span>
+</div>
+<div class="card-row">
+  <span class="price-rrp">RRP £32.40</span>
+  <span class="price-street">£23</span>
+  <span class="price-label">est. online</span><a href="https://www.saxbytrade.com/products/Bathroom/Collection/34483_Pure-1lt-wall-iP44-40W-SW" target="_blank" class="view-link">View →</a>
+</div>
+</div>
+</div>
+<div class="card-evidence">Matching wall light for the Pure ceiling range. Chrome with matt opal duplex glass. IP44. E14 lamp with pull cord switch. Coordinates with Pure flush for a complete bathroom scheme.</div>
+</div>
+
+</div><!-- /product-grid -->
+</div><!-- /section -->
+
+<!-- ============================================ -->
+<!-- SECTION 5: INTERIOR SPOTLIGHTS               -->
+<!-- ============================================ -->
+<div class="section" id="spotlights">
+<div class="section-header">
+  <h2>Interior Spotlights</h2>
+  <span class="count">5 products</span>
+</div>
+<p class="section-intro">The Amalfi range is Saxby's volume spotlight line — available in 1, 2, 3, 4, and 6-light configurations across white, chrome, satin nickel, and antique brass finishes. GU10 lamp holders throughout (replaceable, dimmable with correct bulb). Functional and affordable. The single Amalfi in satin nickel retails from £3.49 at trade outlets — essentially a commodity product.</p>
+
+<div class="product-grid">
+
+<!-- Amalfi Single White -->
+<div class="product-card">
+<div class="card-top">
+<div class="card-img"><span class="rank-badge rank-strong">Entry</span>
+<img src="https://cdn.yesss.co.uk/images/610427_01_43281_Image1_59adafd7d6652a5b07f6b280ceaf2e71.jpeg" alt="Amalfi Single" onerror="this.classList.add('err')">
+<div class="fallback">AMALFI<br>SINGLE</div>
+</div>
+<div class="card-body">
+<div class="product-position">Spotlight · Single · Budget</div>
+<div class="product-name">Amalfi Single Spotlight White GU10</div>
+<div class="product-sku">43281 · GU10</div>
+<div class="product-specs">
+  <span class="spec-tag spec-finish">Gloss White</span>
+  <span class="spec-tag spec-finish">GU10</span>
+  <span class="spec-tag spec-finish">Adjustable</span>
+</div>
+<div class="card-row">
+  <span class="price-street">~£5</span>
+  <span class="price-label">est. trade</span><a href="https://www.saxbytrade.com/products/43281_Amalfi-1lt-Spot-White" target="_blank" class="view-link">View →</a>
+</div>
+</div>
+</div>
+<div class="card-evidence">Budget single GU10 spotlight. Fully adjustable head. Available in gloss white (43281), satin nickel (G2521013), and chrome. The entry-level spotlight for rental properties and budget renovations.</div>
+</div>
+
+<!-- Amalfi 3-Light Round -->
+<div class="product-card">
+<div class="card-top">
+<div class="card-img"><span class="rank-badge rank-top">Volume</span>
+<img src="https://cdn.firstchoicelighting.co.uk/media/catalog/product/cache/0027458637548186c0abe49888404a0c/t/u/tumbnail_2cea4582-eb42-4732-8cf2-4ef21e56e409.jpg" alt="Amalfi 3 Light" onerror="this.classList.add('err')">
+<div class="fallback">AMALFI<br>3-LIGHT</div>
+</div>
+<div class="card-body">
+<div class="product-position">Spotlight · 3-Light Plate</div>
+<div class="product-name">Amalfi 3 Light Spotlight White GU10</div>
+<div class="product-sku">43283 · GU10 × 3</div>
+<div class="product-specs">
+  <span class="spec-tag spec-finish">Gloss White</span>
+  <span class="spec-tag spec-finish">GU10 × 3</span>
+  <span class="spec-tag spec-finish">Round Plate</span>
+</div>
+<div class="card-row">
+  <span class="price-street">~£12</span>
+  <span class="price-label">est. trade</span><a href="https://www.saxbytrade.com/products/interior/Spotlight/43283_Amalfi-3lt-Round-White" target="_blank" class="view-link">View →</a>
+</div>
+</div>
+</div>
+<div class="card-evidence">3-light round plate spotlight. All heads adjustable. GU10 replaceable. Available in white, satin nickel, and antique brass. Budget kitchen/hallway lighting.</div>
+</div>
+
+<!-- Amalfi 4-Light Bar -->
+<div class="product-card">
+<div class="card-top">
+<div class="card-img"><span class="rank-badge rank-strong">Strong</span>
+<img src="https://cdn.jrlighting.co.uk/60993.webp" alt="Amalfi 4 Bar" onerror="this.classList.add('err')">
+<div class="fallback">AMALFI<br>4-BAR</div>
+</div>
+<div class="card-body">
+<div class="product-position">Spotlight · 4-Light Bar</div>
+<div class="product-name">Amalfi 4 Light Spotlight Bar White GU10</div>
+<div class="product-sku">60993 · GU10 × 4</div>
+<div class="product-specs">
+  <span class="spec-tag spec-finish">Gloss White</span>
+  <span class="spec-tag spec-finish">GU10 × 4</span>
+  <span class="spec-tag spec-finish">Linear Bar</span>
+</div>
+<div class="card-row">
+  <span class="price-street">~£18</span>
+  <span class="price-label">est. trade</span><a href="https://www.saxbytrade.com/products/60993_Amalfi-4lt-Bar-White" target="_blank" class="view-link">View →</a>
+</div>
+</div>
+</div>
+<div class="card-evidence">4-light linear bar for kitchen islands and longer rooms. All heads individually adjustable. GU10 replaceable. Also available in antique brass (60992). £18 for a 4-spot bar is commodity pricing.</div>
+</div>
+
+<!-- Amalfi 6-Light Bar -->
+<div class="product-card">
+<div class="card-top">
+<div class="card-img"><span class="rank-badge rank-strong">Premium</span>
+<img src="https://www.universal-lighting.co.uk/assets/61002.jpg" alt="Amalfi 6 Bar" onerror="this.classList.add('err')">
+<div class="fallback">AMALFI<br>6-BAR</div>
+</div>
+<div class="card-body">
+<div class="product-position">Spotlight · 6-Light Bar</div>
+<div class="product-name">Amalfi 6 Light Spotlight Bar White GU10</div>
+<div class="product-sku">61002 · GU10 × 6</div>
+<div class="product-specs">
+  <span class="spec-tag spec-finish">Gloss White</span>
+  <span class="spec-tag spec-finish">GU10 × 6</span>
+  <span class="spec-tag spec-finish">Linear Bar</span>
+</div>
+<div class="card-row">
+  <span class="price-rrp">RRP £48</span>
+  <span class="price-street">£32</span>
+  <span class="price-label">est. online</span><a href="https://www.saxbytrade.com/products/61002_Amalfi-6lt-Bar-White" target="_blank" class="view-link">View →</a>
+</div>
+</div>
+</div>
+<div class="card-evidence">6-light bar — Saxby's largest Amalfi spotlight fitting. GU10 × 6 with individually adjustable heads. Available in white (61002), antique brass (61001), chrome (61000), satin nickel (61003). Budget multi-spot solution.</div>
+</div>
+
+<!-- Amalfi 2-Light AB -->
+<div class="product-card">
+<div class="card-top">
+<div class="card-img"><span class="rank-badge rank-strong">Variant</span>
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTKVEy35F9Buy5izyK3bH65-EFeIL0G2sEi0g&s" alt="Amalfi 3 Light AB" onerror="this.classList.add('err')">
+<div class="fallback">AMALFI<br>3LT BRASS</div>
+</div>
+<div class="card-body">
+<div class="product-position">Spotlight · 3-Light · Classic</div>
+<div class="product-name">Amalfi 3 Light Antique Brass GU10</div>
+<div class="product-sku">60997 · GU10 × 3</div>
+<div class="product-specs">
+  <span class="spec-tag spec-finish">Antique Brass</span>
+  <span class="spec-tag spec-finish">GU10 × 3</span>
+  <span class="spec-tag spec-finish">Round Plate</span>
+</div>
+<div class="card-row">
+  <span class="price-rrp">RRP £21</span>
+  <span class="price-street">£15</span>
+  <span class="price-label">est. online</span><a href="https://www.saxbytrade.com/products/60997_Amalfi-3lt-Round-Antique-Brass" target="_blank" class="view-link">View →</a>
+</div>
+</div>
+</div>
+<div class="card-evidence">Antique brass finish for period-style interiors. 3-light round plate. Adjustable heads. GU10 replaceable. £15 for a brass-finish twin spotlight is commodity territory — ideal for landlord/rental properties.</div>
+</div>
+
+</div><!-- /product-grid -->
+</div><!-- /section -->
+
+<!-- ============================================ -->
+<!-- SECTION 6: INTERIOR WALL LIGHTS              -->
+<!-- ============================================ -->
+<div class="section" id="wall-interior">
+<div class="section-header">
+  <h2>Interior Wall Lights</h2>
+  <span class="count">5 products</span>
+</div>
+<p class="section-intro">Saxby's interior wall range features plaster-in and plaster-over options (Toko, Zeke, Salvo, Mini Crescent) that are paintable to match any wall colour — an architectural specification product. The Madison provides a simple LED wall wash. These are popular with interior designers and spec'd into new-build projects. Plaster wall lights are a growing category in the UK market.</p>
+
+<div class="product-grid">
+
+<!-- Toko 30cm -->
+<div class="product-card">
+<div class="card-top">
+<div class="card-img"><span class="rank-badge rank-top">Core</span>
+<div class="fallback">TOKO<br>30cm</div>
+</div>
+<div class="card-body">
+<div class="product-position">Wall Light · Plaster · Paintable</div>
+<div class="product-name">Toko 1 Light White Plaster Wall 30cm</div>
+<div class="product-sku">61639 · Integrated LED 3W</div>
+<div class="product-specs">
+  <span class="spec-tag spec-led">LED 3W</span>
+  <span class="spec-tag spec-finish">Plaster</span>
+  <span class="spec-tag spec-finish">Paintable</span>
+</div>
+<div class="card-row">
+  <span class="price-rrp">RRP £66</span>
+  <span class="price-street">£44</span>
+  <span class="price-label">est. online</span><a href="https://www.saxbytrade.com/products/Interior" target="_blank" class="view-link">View →</a>
+</div>
+</div>
+</div>
+<div class="card-evidence">Plaster wall light — paintable to match any wall colour. Clean curved wash light effect. LED integrated. 251 units in stock at TLC. Popular with interior designers for seamless wall integration. Also available in 20cm (61638).</div>
+</div>
+
+<!-- Toko 20cm -->
+<div class="product-card">
+<div class="card-top">
+<div class="card-img"><span class="rank-badge rank-strong">Compact</span>
+<div class="fallback">TOKO<br>20cm</div>
+</div>
+<div class="card-body">
+<div class="product-position">Wall Light · Plaster · Compact</div>
+<div class="product-name">Toko 1 Light White Plaster Wall 20cm</div>
+<div class="product-sku">61638 · Integrated LED 3W</div>
+<div class="product-specs">
+  <span class="spec-tag spec-led">LED 3W</span>
+  <span class="spec-tag spec-finish">Plaster</span>
+  <span class="spec-tag spec-finish">Paintable</span>
+</div>
+<div class="card-row">
+  <span class="price-rrp">RRP £72</span>
+  <span class="price-street">£53</span>
+  <span class="price-label">est. online</span><a href="https://www.saxbytrade.com/products/Interior" target="_blank" class="view-link">View →</a>
+</div>
+</div>
+</div>
+<div class="card-evidence">Compact 20cm version of Toko. Same paintable plaster construction. LED integrated. Ideal for hallways and staircases where 30cm is too large. 196 units in stock at TLC.</div>
+</div>
+
+<!-- Zeke Trimless -->
+<div class="product-card">
+<div class="card-top">
+<div class="card-img"><span class="rank-badge rank-strong">Design</span>
+<div class="fallback">ZEKE<br>TRIMLESS</div>
+</div>
+<div class="card-body">
+<div class="product-position">Wall Light · Plaster-In · Recessed</div>
+<div class="product-name">Zeke Trimless Plaster-In LED Wall Light</div>
+<div class="product-sku">92312 · Integrated LED 1.6W</div>
+<div class="product-specs">
+  <span class="spec-tag spec-led">LED 1.6W</span>
+  <span class="spec-tag spec-finish">Plaster-In</span>
+  <span class="spec-tag spec-finish">Trimless</span>
+</div>
+<div class="card-row">
+  <span class="price-rrp">RRP £61.50</span>
+  <span class="price-street">£32</span>
+  <span class="price-label">est. online</span><a href="https://www.saxbytrade.com/products/Interior" target="_blank" class="view-link">View →</a>
+</div>
+</div>
+</div>
+<div class="card-evidence">Fully recessed plaster-in wall light — sits flush with the wall surface. Clean flowing lines, paintable. 1.6W LED for subtle accent lighting. 274 units in stock at TLC. Architectural specification product for new builds and high-end renovations.</div>
+</div>
+
+<!-- Madison LED Wall -->
+<div class="product-card">
+<div class="card-top">
+<div class="card-img"><span class="rank-badge rank-strong">Chrome</span>
+<div class="fallback">MADISON<br>LED WALL</div>
+</div>
+<div class="card-body">
+<div class="product-position">Wall Light · LED · Brushed Chrome</div>
+<div class="product-name">Madison Brushed Chrome LED Wall Light</div>
+<div class="product-sku">73445 · Integrated LED</div>
+<div class="product-specs">
+  <span class="spec-tag spec-led">Integrated LED</span>
+  <span class="spec-tag spec-finish">Brushed Chrome</span>
+</div>
+<div class="card-row">
+  <span class="price-rrp">RRP £36</span>
+  <span class="price-street">£29</span>
+  <span class="price-label">est. online</span><a href="https://www.saxbytrade.com/products/Interior" target="_blank" class="view-link">View →</a>
+</div>
+</div>
+</div>
+<div class="card-evidence">Simple LED wall wash in brushed chrome. Integrated LED module. 264 units in stock at TLC. Clean, contemporary styling for bedside or hallway use. Budget LED wall light option.</div>
+</div>
+
+<!-- Mini Crescent -->
+<div class="product-card">
+<div class="card-top">
+<div class="card-img"><span class="rank-badge rank-strong">Compact</span>
+<div class="fallback">MINI<br>CRESCENT</div>
+</div>
+<div class="card-body">
+<div class="product-position">Wall Light · Plaster · Decorative</div>
+<div class="product-name">Mini Crescent 1 Light Plaster Wall</div>
+<div class="product-sku">13885 · G9</div>
+<div class="product-specs">
+  <span class="spec-tag spec-finish">White Plaster</span>
+  <span class="spec-tag spec-finish">G9</span>
+  <span class="spec-tag spec-finish">Paintable</span>
+</div>
+<div class="card-row">
+  <span class="price-rrp">RRP £62.40</span>
+  <span class="price-street">£40</span>
+  <span class="price-label">est. online</span><a href="https://www.saxbytrade.com/products/Interior" target="_blank" class="view-link">View →</a>
+</div>
+</div>
+</div>
+<div class="card-evidence">Decorative plaster wall light with curved crescent wash effect. G9 replaceable lamp. Paintable. 108 units in stock at TLC. Provides a distinctive up-and-over wall wash pattern. Part of Saxby's plaster wall range.</div>
+</div>
+
+</div><!-- /product-grid -->
+</div><!-- /section -->
+
+<!-- ============================================ -->
+<!-- SECTION 7: COMMERCIAL                        -->
+<!-- ============================================ -->
+<div class="section" id="commercial">
+<div class="section-header">
+  <h2>Commercial (Bulkhead & Floodlight)</h2>
+  <span class="count">3 products</span>
+</div>
+<p class="section-intro">Saxby's commercial range is trade-relevant because these products cross over into domestic installations — the HeroPRO bulkhead appears on garages, porches, and communal areas. The Guard floodlight range is new for 2025/26. Both ranges feature CCT and wattage selection for installation flexibility. The HeroPRO has massive stock depth (22,000+ units at one retailer alone).</p>
+
+<div class="product-grid">
+
+<!-- HeroPRO CCT Bulkhead -->
+<div class="product-card">
+<div class="card-top">
+<div class="card-img"><span class="rank-badge rank-top">#1 Trade</span>
+<div class="fallback">HEROPRO<br>BULKHEAD</div>
+</div>
+<div class="card-body">
+<div class="product-position">Bulkhead · IP65 · Volume</div>
+<div class="product-name">HeroPRO CCT Tri-Wattage Bulkhead White IP65</div>
+<div class="product-sku">95539 · LED 6/12/18W</div>
+<div class="product-specs">
+  <span class="spec-tag spec-ip">IP65</span>
+  <span class="spec-tag spec-led">CCT Tri-Watt</span>
+  <span class="spec-tag spec-finish">IK10</span>
+</div>
+<div class="card-row">
+  <span class="price-rrp">RRP £42.51</span>
+  <span class="price-street">£16</span>
+  <span class="price-label">est. online</span><a href="https://www.saxbytrade.com/products/Commercial/Bulkhead" target="_blank" class="view-link">View →</a>
+</div>
+</div>
+</div>
+<div class="card-evidence">Saxby's signature bulkhead. Tri-wattage (6/12/18W) + CCT selectable. IP65, IK10 impact rated. Fast-fit hinged gear tray, push-fit connector. Available in Standard, Emergency, Microwave, and Corridor variants. 22,173 units in stock at TLC. Chrome bezel + eyelid/grill accessories available. The domestic porch/garage light that happens to be commercial spec.</div>
+</div>
+
+<!-- HeroPRO Emergency -->
+<div class="product-card">
+<div class="card-top">
+<div class="card-img"><span class="rank-badge rank-strong">Spec-Grade</span>
+<div class="fallback">HEROPRO<br>EMERGENCY</div>
+</div>
+<div class="card-body">
+<div class="product-position">Bulkhead · Emergency</div>
+<div class="product-name">HeroPRO CCT Tri-Wattage Emergency</div>
+<div class="product-sku">95540 · LED 6/12/18W + Battery</div>
+<div class="product-specs">
+  <span class="spec-tag spec-ip">IP65</span>
+  <span class="spec-tag spec-led">Emergency</span>
+  <span class="spec-tag spec-finish">IK10</span>
+</div>
+<div class="card-row">
+  <span class="price-street">~£30</span>
+  <span class="price-label">est. trade</span><a href="https://www.saxbytrade.com/products/Commercial/Bulkhead/95540_Saxby-HeroPRO-CCT-Tri-Wattage-Bulkhead-Emergency" target="_blank" class="view-link">View →</a>
+</div>
+</div>
+</div>
+<div class="card-evidence">Emergency version of HeroPRO with integral battery backup. Same IP65/IK10 spec. Essential for commercial compliance (Building Regs Part B). Same gear tray and push-fit system. Available with microwave sensor variant too.</div>
+</div>
+
+<!-- Guard Floodlight -->
+<div class="product-card">
+<div class="card-top">
+<div class="card-img"><span class="rank-badge rank-top">New Range</span>
+<div class="fallback">GUARD<br>FLOOD</div>
+</div>
+<div class="card-body">
+<div class="product-position">Floodlight · New Range</div>
+<div class="product-name">Guard LED Floodlight IP65 Black</div>
+<div class="product-sku">107636 (100W) · Integrated LED</div>
+<div class="product-specs">
+  <span class="spec-tag spec-ip">IP65</span>
+  <span class="spec-tag spec-black">Matt Black</span>
+  <span class="spec-tag spec-led">20/30/50/100W</span>
+</div>
+<div class="card-row">
+  <span class="price-street">~£15–£50</span>
+  <span class="price-label">est. (size dependent)</span><a href="https://www.saxbytrade.com/products/Exterior/Floodlight" target="_blank" class="view-link">View →</a>
+</div>
+</div>
+</div>
+<div class="card-evidence">New floodlight range for 2025/26. Die cast aluminium with clear glass. Wide-angle beam. Available in 20W, 30W, 50W, 100W. 4000K cool white. PIR override versions available. Matt black finish. IP65. Replaces older Surge range.</div>
+</div>
+
+</div><!-- /product-grid -->
+</div><!-- /section -->
+</div><!-- /container -->
+
+<!-- MARKET DYNAMICS & COMMERCIAL INSIGHTS -->
+<div class="container">
+<section class="section" id="dynamics">
+<div class="section-header"><h2>Market Dynamics &amp; Commercial Insights</h2><span class="count">7 key findings</span></div>
+<div class="dynamics-grid">
+<div class="dynamic-card"><h3>CosmosEco V3 Is Screwfix's #1 Saxby Downlight</h3><p>Screwfix doesn't stock ShieldECO — they sell CosmosEco V3 (4.9★, £8.89 chrome single). This channel-specific branding means the same manufacturer has different product lines for different retailers.</p><div class="implication">→ Channel-specific branding creates market complexity for competitors.</div></div>
+<div class="dynamic-card"><h3>121% Price Spread on Same Product</h3><p>HeroPRO bulkhead 95539: Lamplec £9.99 vs Electrical Counter £22.08. IkonPRO decking: Alert £40.01 vs EC £54.00 (35%). ShieldECO Satin Nickel: EC special £5.70 vs standard £6.84. This spread rewards procurement research.</p><div class="implication">→ Trade pricing intelligence is a competitive advantage.</div></div>
+
+<div class="dynamic-card"><h3>Warranty Registration Creates Trade Friction</h3><p>Extended warranty (3yr/5yr) requires online registration with proof of purchase AND NAPIT/NICEIC licence number. Electricians' forums describe this as discriminatory. Standard warranty is only 2 years.</p><div class="implication">→ Simple, no-registration warranties would differentiate immediately.</div></div>
+<div class="dynamic-card"><h3>Oslo Outsells Palin at Screwfix</h3><p>Oslo PIR Grey (£36.99, 4.9★, 9 reviews) is #1 Saxby outdoor wall light at Screwfix. The Palin marine-grade range — ostensibly the flagship — ranks lower. Entry-priced Arc (£12.98) and Icarus (£14.99) also rank highly.</p><div class="implication">→ Value-priced outdoor wall lights drive volume, not premium marine-grade.</div></div>
+<div class="dynamic-card"><h3>ShieldSLIM Solves Shallow Ceiling Voids</h3><p>Slim-profile 7W fire-rated downlight with 4CCT selection (2700/3000/4000/6500K). Designed specifically for shallow ceiling voids where standard-depth downlights won't fit — one of the most common installation headaches for electricians on refurb projects.</p><div class="implication">→ Products that solve real installation pain points drive trade loyalty.</div></div>
+<div class="dynamic-card"><h3>15+ Downlight Sub-Ranges Create Confusion</h3><p>Electrical Counter lists ShieldECO, ShieldPRO, OrbitalPRO, SirioDISC, Speculo, Garrix, Hoxton, Ravel, Axial, Cast, Converse, Heatguard, LALO, Pacto, Peake, Tetra, Xeno — plus CosmosEco at Screwfix. Range proliferation may confuse specifiers.</p><div class="implication">→ A simplified, clearly differentiated range would be easier to specify.</div></div>
+<div class="dynamic-card"><h3>Guard Floodlight = 2025/26 Growth Play</h3><p>New floodlight range (20/30/50/100/200W) in die-cast aluminium, IP65, with PIR override options. Available at 8+ online retailers. 3-year warranty (2+1 extended). Extends Saxby's outdoor/commercial footprint beyond bulkheads.</p><div class="implication">→ Saxby is actively expanding outdoor/commercial categories.</div></div>
+</div>
+</section>
+
+<div class="methodology-box" id="methodology">
+  <h3>Research Methodology</h3>
+  <p>Multi-retailer pricing sweep across 15+ UK retailers, February 2026. Sources: Screwfix, Electrical Counter, Click4Electrics, Lamplec, Alert Electrical, Electrical4Less, Electrical2Go, Amazon UK, Sparks Direct, YESSS Electrical, Direct Trade Supplies, Lights2Go, Lightologist, Massive Lighting, TEW Electrical, Falcon Electrical, and saxbytrade.com.</p>
+  <p>Rankings derived from: Screwfix "Top Sellers" default sort, multi-retailer stock availability, review counts and ratings, Electricians' Forums warranty discussion threads, and saxbytrade.com product specifications. Pricing reflects lowest advertised online prices at time of research. Warranty terms verified against saxbytrade.com/Feedback/Extended-Warranty-Registration.</p>
+</div>
+
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+<div class="footer-inner">
+  <div>
+    <a href="index.html" class="back-link">← Back to Portal</a>
+  </div>
+  <div>UK Lighting Market Intelligence · Compiled February 2026 · Pricing subject to change · Not for redistribution</div>
+</div>
+</footer>
+
+<script>
+document.querySelectorAll('.card-img img').forEach(img => {
+  img.addEventListener('error', function() { this.classList.add('err'); });
+});
+</script>
+
+</body>
+</html>
